@@ -15,11 +15,15 @@ export class AlumniService {
     return 'This action adds a new alumnus';
   }
 
-  async findAll() {
-    const alumnus = await this.alumniRepo.find();
+  async findAll(page: number, limit: number) {
+    //fetch paginated alumnus
+    const alumnus = await this.alumniRepo.findAndCount({
+      take: limit,
+      skip: page,
+    });
     console.log(alumnus);
 
-    return `This action returns all alumni`;
+    return alumnus;
   }
 
   findOne(id: number) {

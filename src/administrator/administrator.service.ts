@@ -11,7 +11,7 @@ export class AdministratorService {
     @InjectRepository(Administrator)
     private readonly adminRepo: Repository<Administrator>,
   ) {
-    //this.findOne('213', '213');
+    // this.findOne('213', '213');
   }
   create(createAdministratorDto: CreateAdministratorDto) {
     return 'This action adds a new administrator';
@@ -19,13 +19,17 @@ export class AdministratorService {
 
   async findAll() {
     const admins = await this.adminRepo.find();
-    console.log(admins);
+    console.log(admins, 'TODOS');
     return admins;
   }
 
-  async findOne(id: string, password: string) {
-    const admin = await this.adminRepo.findOneBy({ dni: id });
-    if (admin.password === password) {
+  async findOne(dni: string, password: string) {
+    console.log(dni, password);
+
+    const admin = await this.adminRepo.findOneBy({ dni });
+    console.log(admin, 'ADMIN');
+
+    if (admin.password.trim() === password.trim()) {
       console.log(admin, 'USUARIO CORRECTO');
       return admin;
     } else {
