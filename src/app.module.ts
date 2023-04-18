@@ -12,6 +12,15 @@ import { ServicesModule } from './services/services.module';
 import { SpecializationModule } from './specialization/specialization.module';
 import { JobOfferModule } from './job-offer/job-offer.module';
 import { AdministratorModule } from './administrator/administrator.module';
+import { Administrator } from './administrator/entities/administrator.entity';
+import { Activity } from './activity/entities/activity.entity';
+import { Alumnus } from './alumni/entities/alumnus.entity';
+import { JobOffer } from './job-offer/entities/job-offer.entity';
+import { PostStudy } from './post-studies/entities/post-study.entity';
+import { Service } from './services/entities/service.entity';
+import { Specialization } from './specialization/entities/specialization.entity';
+import { Tfg } from './tfg/entities/tfg.entity';
+import { WorkHistory } from './work-history/entities/work-history.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -25,9 +34,10 @@ import { AdministratorModule } from './administrator/administrator.module';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        //entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
         keepConnectionAlive: true,
+        entities: [Administrator,Activity,Alumnus,JobOffer,PostStudy,Service,Specialization,Tfg,WorkHistory]
       }),
     }),
     AlumniModule,

@@ -11,7 +11,7 @@ export class AdministratorService {
     @InjectRepository(Administrator)
     private readonly adminRepo: Repository<Administrator>,
   ) {
-    this.findOne('213', '213');
+    //this.findOne('213', '213');
   }
   create(createAdministratorDto: CreateAdministratorDto) {
     return 'This action adds a new administrator';
