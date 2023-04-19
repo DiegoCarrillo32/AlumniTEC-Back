@@ -44,6 +44,9 @@ export class Alumnus {
   @Column({ default: true })
   isActive: boolean;
 
+  @Column()
+  image: string;
+
   @OneToMany(() => Tfg, (tfg) => tfg.alumni)
   tfg: Tfg[];
 

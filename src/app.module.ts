@@ -21,6 +21,7 @@ import { Service } from './services/entities/service.entity';
 import { Specialization } from './specialization/entities/specialization.entity';
 import { Tfg } from './tfg/entities/tfg.entity';
 import { WorkHistory } from './work-history/entities/work-history.entity';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -59,6 +60,7 @@ import { WorkHistory } from './work-history/entities/work-history.entity';
     SpecializationModule,
     JobOfferModule,
     AdministratorModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

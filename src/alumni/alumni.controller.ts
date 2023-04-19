@@ -27,7 +27,7 @@ export class AlumniController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.alumniService.findOne(+id);
+    return this.alumniService.findOne(id);
   }
 
   @Patch(':id')

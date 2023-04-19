@@ -17,17 +17,23 @@ export class AlumniService {
 
   async findAll(page: number, limit: number) {
     //fetch paginated alumnus
-    const alumnus = await this.alumniRepo.findAndCount({
-      take: limit,
-      skip: page,
-    });
-    console.log(alumnus);
+    const alumnus = await this.alumniRepo.find();
+    // const alumnus = await this.alumniRepo.findAndCount({
+    //   take: limit,
+    //   skip: page * limit,
+    // });
 
     return alumnus;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} alumnus`;
+  async findOne(id: string) {
+    return await this.alumniRepo.findOne({
+      where: { id },
+      relations: {
+        activity: true,
+        specialization: true,
+      },
+    });
   }
 
   update(id: number, updateAlumnusDto: UpdateAlumnusDto) {

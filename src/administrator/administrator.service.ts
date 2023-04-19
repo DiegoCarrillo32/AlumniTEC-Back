@@ -19,18 +19,15 @@ export class AdministratorService {
 
   async findAll() {
     const admins = await this.adminRepo.find();
-    console.log(admins, 'TODOS');
     return admins;
   }
 
   async findOne(dni: string, password: string) {
-    console.log(dni, password);
-
     const admin = await this.adminRepo.findOneBy({ dni });
-    console.log(admin, 'ADMIN');
-
+    if (!admin) {
+      throw new Error('Password or email incorrect');
+    }
     if (admin.password.trim() === password.trim()) {
-      console.log(admin, 'USUARIO CORRECTO');
       return admin;
     } else {
       throw new Error('Password or email incorrect');
