@@ -30,6 +30,9 @@ export class Alumnus {
   jobTitle: string;
 
   @Column()
+  career: string;
+
+  @Column()
   linkedIn: string;
 
   @Column()

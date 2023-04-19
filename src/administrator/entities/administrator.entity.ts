@@ -9,6 +9,9 @@ export class Administrator {
   dni: string;
 
   @Column()
+  career: string;
+
+  @Column()
   password: string;
 
   @Column()

@@ -21,6 +21,10 @@ export class AdministratorService {
     const admins = await this.adminRepo.find();
     return admins;
   }
+  async findOneById(id: string) {
+    const admin = await this.adminRepo.findOne({ where: { id } });
+    return admin;
+  }
 
   async findOne(dni: string, password: string) {
     const admin = await this.adminRepo.findOneBy({ dni });

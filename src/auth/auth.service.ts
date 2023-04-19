@@ -17,17 +17,45 @@ export class AuthService {
       id: user.id,
       dni: user.dni,
       isActive: user.isActive,
+      isAdminOf: user.career,
     };
   }
 
   async validateToken(token: string): Promise<any> {
     try {
       const tokenResult = await this.jwtService.verifyAsync(token);
-      return tokenResult;
+      const user = await this.adminService.findOneById(tokenResult.username);
+      const payload = { username: user.id, sub: user.dni };
+      return {
+        access_token: await this.jwtService.signAsync(payload),
+        id: user.id,
+        dni: user.dni,
+        isActive: user.isActive,
+        isAdminOf: user.career,
+      };
     } catch (error) {
       return {
         error: 'Token invalido',
       };
     }
   }
+
+  // async refreshToken(token: string): Promise<any> {
+  //   try {
+  //     const tokenResult = await this.jwtService.verifyAsync(token);
+  //     const user = await this.adminService.findOneById(tokenResult.username);
+  //     const payload = { username: user.id, sub: user.dni };
+  //     return {
+  //       access_token: await this.jwtService.signAsync(payload),
+  //       id: user.id,
+  //       dni: user.dni,
+  //       isActive: user.isActive,
+  //       isAdminOf: user.career,
+  //     };
+  //   } catch (error) {
+  //     return {
+  //       error: 'Token invalido',
+  //     };
+  //   }
+  // }
 }

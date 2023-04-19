@@ -20,9 +20,13 @@ export class AlumniController {
     return this.alumniService.create(createAlumnusDto);
   }
 
-  @Get(':page/:limit')
-  findAll(@Param('page') page: number, @Param('limit') limit: number) {
-    return this.alumniService.findAll(page, limit);
+  @Get(':page/:limit/:search')
+  findAll(
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+    @Param('search') search: string,
+  ) {
+    return this.alumniService.findAll(page, limit, search);
   }
 
   @Get(':id')
