@@ -17,9 +17,13 @@ export class AlumniService {
 
   async findAll(page: number, limit: number, search: string) {
     //fetch paginated alumnus
-    const alumnus = await this.alumniRepo.findBy({
-      career: search,
+    const alumnus = await this.alumniRepo.find({
+      where: {
+        career: search,
+      },
+      //relations: ['activity'],
     });
+
     // const alumnus = await this.alumniRepo.findAndCount({
     //   take: limit,
     //   skip: page * limit,
@@ -29,13 +33,13 @@ export class AlumniService {
   }
 
   async findOne(id: string) {
-    return await this.alumniRepo.findOne({
+    const res = await this.alumniRepo.findOne({
       where: { id },
-      relations: {
-        activity: true,
-        specialization: true,
-      },
+      relations: ['activity'],
     });
+    console.log(res);
+
+    return res;
   }
 
   update(id: number, updateAlumnusDto: UpdateAlumnusDto) {

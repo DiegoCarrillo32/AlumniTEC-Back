@@ -4,7 +4,13 @@ import { Service } from 'src/services/entities/service.entity';
 import { Specialization } from 'src/specialization/entities/specialization.entity';
 import { Tfg } from 'src/tfg/entities/tfg.entity';
 import { WorkHistory } from 'src/work-history/entities/work-history.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'Alumnus' })
 export class Alumnus {
@@ -53,7 +59,7 @@ export class Alumnus {
   @OneToMany(() => Tfg, (tfg) => tfg.alumni)
   tfg: Tfg[];
 
-  @OneToMany(() => Activity, (activity) => activity.alumni)
+  @ManyToMany(() => Activity, (activity) => activity.alumni)
   activity: Activity[];
 
   @OneToMany(() => Service, (service) => service.alumni)
@@ -62,8 +68,8 @@ export class Alumnus {
   @OneToMany(() => PostStudy, (postStudy) => postStudy.alumni)
   postStudy: PostStudy[];
 
-  @OneToMany(() => Specialization, (spec) => spec.alumni)
-  specialization: Specialization[];
+  //@OneToMany(() => Specialization, (spec) => spec.alumni)
+  //specialization: Specialization[];
 
   @OneToMany(() => WorkHistory, (work) => work.alumni)
   workHistory: WorkHistory[];

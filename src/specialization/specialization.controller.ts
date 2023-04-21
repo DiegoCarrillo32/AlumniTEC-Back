@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SpecializationService } from './specialization.service';
 import { CreateSpecializationDto } from './dto/create-specialization.dto';
 import { UpdateSpecializationDto } from './dto/update-specialization.dto';
@@ -23,12 +31,15 @@ export class SpecializationController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSpecializationDto: UpdateSpecializationDto) {
-    return this.specializationService.update(+id, updateSpecializationDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateSpecializationDto: UpdateSpecializationDto,
+  ) {
+    return this.specializationService.update(id, updateSpecializationDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.specializationService.remove(+id);
+    return this.specializationService.remove(id);
   }
 }
