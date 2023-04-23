@@ -42,6 +42,16 @@ export class AlumniService {
     return res;
   }
 
+  async findAlumniNameAndId(career: string) {
+    const res = await this.alumniRepo.find({
+      select: ['id', 'name'],
+      where: {
+        career: career,
+      },
+    });
+    return res;
+  }
+
   update(id: number, updateAlumnusDto: UpdateAlumnusDto) {
     return `This action updates a #${id} alumnus`;
   }

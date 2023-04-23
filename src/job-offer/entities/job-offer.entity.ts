@@ -3,10 +3,10 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class JobOffer {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
   @Column()
   description: string;
-  @Column()
+  @Column('bytea')
   image: string;
   @Column()
   initDate: Date;

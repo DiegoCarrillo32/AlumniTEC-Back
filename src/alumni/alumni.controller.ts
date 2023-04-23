@@ -43,4 +43,9 @@ export class AlumniController {
   remove(@Param('id') id: string) {
     return this.alumniService.remove(+id);
   }
+
+  @Get('filter/:career')
+  findAllNamesAndId(@Param('career') career: string) {
+    return this.alumniService.findAlumniNameAndId(career);
+  }
 }
