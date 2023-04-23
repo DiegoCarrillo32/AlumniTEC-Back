@@ -17,24 +17,20 @@ export class ActivityService {
   async create(createActivityDto: CreateActivityDto) {
     const res = await this.alumniRepo.find({
       where: {
-        id: In([
-          '034bb003-4ce9-4a00-9621-fbac55a98de8',
-          '06c87bc4-175d-4d00-a5b5-94e677bfd001',
-        ]),
+        id: In(createActivityDto.alumni),
       },
     });
     const spec = this.activityRepo.create({
-      activityName: 'test',
+      activityName: createActivityDto.activityName,
       isActive: true,
       alumni: res,
-      activityDescription: 'test',
-      activityPlace: 'test',
-      endDate: new Date(),
-      initDate: new Date(),
+      activityDescription: createActivityDto.activityDescription,
+      activityPlace: createActivityDto.activityPlace,
+      endDate: createActivityDto.endDate,
+      initDate: createActivityDto.initDate,
     });
-    await this.activityRepo.save(spec);
-    return res;
-    return 'This action adds a new activity';
+    const act = await this.activityRepo.save(spec);
+    return act;
   }
 
   async findAll() {
