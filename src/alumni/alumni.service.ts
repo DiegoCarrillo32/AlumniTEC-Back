@@ -43,12 +43,12 @@ export class AlumniService {
   }
 
   async findAlumniNameAndId(career: string) {
-    const res = await this.alumniRepo.find({
-      select: ['id', 'name'],
-      where: {
-        career: career,
-      },
-    });
+    const res = await this.alumniRepo
+      .createQueryBuilder('alumnus')
+      .select('alumnus.id', 'value')
+      .addSelect('alumnus.name', 'label')
+      .where('alumnus.career = :career', { career: career })
+      .getRawMany();
     return res;
   }
 
