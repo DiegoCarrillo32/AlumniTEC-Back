@@ -4,15 +4,29 @@ import { UpdatePostStudyDto } from './dto/update-post-study.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostStudy } from './entities/post-study.entity';
 import { Repository } from 'typeorm';
+import { Alumnus } from 'src/alumni/entities/alumnus.entity';
 
 @Injectable()
 export class PostStudiesService {
   constructor(
     @InjectRepository(PostStudy)
     private readonly postStudyRepo: Repository<PostStudy>,
+    @InjectRepository(Alumnus)
+    private readonly alumniRepo: Repository<Alumnus>,
   ) {}
-  create(createPostStudyDto: CreatePostStudyDto) {
-    return 'This action adds a new postStudy';
+  async create(createPostStudyDto: CreatePostStudyDto) {
+    const alumni = await this.alumniRepo.findOne({
+      where: { id: createPostStudyDto.alumniId },
+    });
+    if (alumni) {
+      const postStudy = await this.postStudyRepo.create({
+        ...createPostStudyDto,
+        alumni,
+      });
+      await this.postStudyRepo.save(postStudy);
+      return postStudy;
+    }
+    return null;
   }
 
   findAll() {
