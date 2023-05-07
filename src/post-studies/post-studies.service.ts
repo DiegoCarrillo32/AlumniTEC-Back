@@ -38,9 +38,11 @@ export class PostStudiesService {
   }
 
   async update(id: string, updatePostStudyDto: UpdatePostStudyDto) {
+    console.log(id)
     const postStudy = await this.postStudyRepo.findOne({
       where: { id },
     });
+    console.log(postStudy, 'texto');
     if (postStudy) {
       const res = await this.postStudyRepo.update(id, updatePostStudyDto);
       return res;

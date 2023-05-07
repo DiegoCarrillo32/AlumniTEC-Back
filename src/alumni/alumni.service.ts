@@ -35,7 +35,7 @@ export class AlumniService {
   async findOne(id: string) {
     const res = await this.alumniRepo.findOne({
       where: { id },
-      relations: ['activity'],
+      relations: ['activity','postStudy'],
     });
     console.log(res);
 
