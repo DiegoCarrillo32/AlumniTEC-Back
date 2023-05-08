@@ -22,6 +22,7 @@ export class PostStudiesService {
       const postStudy = await this.postStudyRepo.create({
         ...createPostStudyDto,
         alumni,
+        isActive:true
       });
       await this.postStudyRepo.save(postStudy);
       return postStudy;
