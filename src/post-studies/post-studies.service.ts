@@ -41,6 +41,7 @@ export class PostStudiesService {
     const postStudy = await this.postStudyRepo.findOne({
       where: { id },
     });
+
     if (postStudy) {
       const res = await this.postStudyRepo.update(id, updatePostStudyDto);
       return res;
