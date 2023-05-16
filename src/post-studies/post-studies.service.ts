@@ -22,6 +22,7 @@ export class PostStudiesService {
       const postStudy = await this.postStudyRepo.create({
         ...createPostStudyDto,
         alumni,
+        isActive: true,
       });
       await this.postStudyRepo.save(postStudy);
       return postStudy;
@@ -38,6 +39,7 @@ export class PostStudiesService {
   }
 
   async update(id: string, updatePostStudyDto: UpdatePostStudyDto) {
+    console.log(id);
     const postStudy = await this.postStudyRepo.findOne({
       where: { id },
     });
