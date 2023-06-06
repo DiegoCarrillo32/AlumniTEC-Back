@@ -38,6 +38,22 @@ export class PostStudiesService {
     return `This action returns a #${id} postStudy`;
   }
 
+  async changeIsActive(id: string) {
+    const postStudy = await this.postStudyRepo.findOne({
+      where: { id },
+    });
+
+    if (postStudy) {
+      const res = await this.postStudyRepo.update(id, {
+        isActive: !postStudy.isActive
+      });
+      return res;
+      // update postStudy
+    }    
+    return null
+
+  }
+
   async update(id: string, updatePostStudyDto: UpdatePostStudyDto) {
     console.log(id);
     const postStudy = await this.postStudyRepo.findOne({
@@ -52,6 +68,8 @@ export class PostStudiesService {
 
     return null;
   }
+
+  
 
   remove(id: number) {
     return `This action removes a #${id} postStudy`;

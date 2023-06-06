@@ -37,6 +37,12 @@ export class PostStudiesController {
   ) {
     return this.postStudiesService.update(id, updatePostStudyDto);
   }
+  @Patch('active/:id')
+  changeIsActive(
+    @Param('id') id: string
+  ) {
+    return this.postStudiesService.changeIsActive(id);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
